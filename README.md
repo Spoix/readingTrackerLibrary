@@ -1,0 +1,1 @@
+This project is designed to provide user with a quick way to track their reading. Webpage is responsive to mobile devices.

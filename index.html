@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+    <script defer src="js/script.js"></script>
+    <title>Classical Library</title>
+</head>
+<body>
+<div class="main-page-container">
+    <!-- Header section -->
+    <header class="nav-section to-blur">
+        <div class="logo-container">
+            <i class="far fa-bookmark  fa-2x" class="logo-icon"></i>        
+            <span class="logo-name">v</span>
+            <span class="logo-name" id="lib-name">Lib</span>
+        </div>
+        <nav class="navigation-menu">
+            <a href="#virtual-library" class="nav-link" id="about">About</a>
+            <a href="https://bookaid.org/support-us/donate-books/" target="_blank" class="nav-link" id="donate">Donate</a>
+        </nav>
+    </header>
+
+    <!-- Showcase section -->
+    <section class="showcase to-blur">
+        <div class="text-container">
+            <p class="showcase-text" id="showcase-text-main">Welcome to our <i id="animate-bounce">humble</i> virtual library</p>
+            <p class="showcase-text" id="showcase-text-sub">outside of a dog, a book is a man's best friend!</p>
+            <a href="#virtual-library" id="get-started-btn">Let's read!</a>
+        </div>
+        <div id="grid-title">Why read more?</div>
+        <div class="grid-elements-container">
+            <div class="grid-element">
+                <i class="fas fa-brain fa-2x"></i>
+                <p class="grid-element-title">Improve ognition</p>
+                <p class="grid-element-description">Reading is the brain's equivalent of weight training. So go practice it regularly and make some cognition gains!</p>
+            </div>
+            <div class="grid-element">
+                <i class="fas fa-heartbeat fa-2x"></i>
+                <p class="grid-element-title">Reduce stress</p>
+                <p class="grid-element-description">Get yourself out of the day-to-day rush. Relax, sit back, get your book and join us.</p>
+            </div>
+            <div class="grid-element">
+                <i class="far fa-lightbulb fa-2x"></i>
+                <p class="grid-element-title">Innovative solutions</p>
+                <p class="grid-element-description">Reading open your mind and provide you with new and exciting insights about life and what not.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Library section -->
+    <section id="virtual-library" class="library">
+        <div class="library-title to-blur">Welcome to your reading tracker section!</div>
+        <div class="library-subtitle to-blur">
+            <button id="add-book" class="to-blur">
+                <i class="far fa-plus-square"></i>
+                <span>Add new book</span>
+            </button>
+        </div>
+        <form id="add-book-form">
+            <div id="form-title">Add your book</div>
+            <div class="book-info">
+                <input type="text" name="title" id="title" placeholder="Title" required>
+                <input type="text" name="author" id="author" placeholder="Author" required>
+                <input type="text" name="tpages" id="tpages" placeholder="Total pages" required>
+                <input type="text" name="cpages" id="cpages" placeholder="Current page" required>
+                <div id="book-finished">
+                    <p>Have you finished the book?</p>
+                    <input type="checkbox">
+                </div>
+                <div class="buttons-container">
+                    <button class="form-btn" id="cancel">Cancel</button>
+                    <button class="form-btn" id="add">Add</button>
+                </div>
+            </div>
+        </form>
+        <div id="library-elements-container" class="to-blur">
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="to-blur">
+        <i class="fab fa-github-alt"></i>
+        <span>Created by <a href="https://github.com/vinicap" target="_blank"><i>Spoix</i></a></span>
+    </footer>
+</div>
+</body>
+</html>

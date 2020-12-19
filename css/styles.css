@@ -195,7 +195,9 @@ footer {
     left: 50%;
     transform: translate(-50%, -50%);
     display: none;
-    border: none;
+    border: 0.2rem solid white;
+    border-radius: 1rem;
+    padding: 1rem;
 }
 
 .book-info {
@@ -208,6 +210,8 @@ footer {
 .book-info > input {
     outline: none;
     border: none;
+    border-radius: 0.5rem;
+    padding: 1rem;
     width: 100%;
     position: relative;
     top: 50%;
@@ -216,6 +220,16 @@ footer {
     background-color: black;
     border-bottom: 0.1rem solid white;
     color: white;
+    transition: background-color 2s;
+    cursor: pointer;
+}
+
+.book-info > input:hover {
+    background-color: rgb(41, 0, 41);
+}
+
+.book-info > input:focus {
+    cursor: text;
 }
 
 #form-title {
@@ -323,6 +337,8 @@ footer {
     filter: blur(2rem);
     pointer-events: none;
     user-select: none;
+    background: black;
+    transition: all 1s;
 }
 
 

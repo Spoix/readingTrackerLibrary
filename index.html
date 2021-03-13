@@ -14,20 +14,25 @@
 <div class="main-page-container">
     <!-- Header section -->
     <header class="nav-section to-blur">
-        <div class="logo-container">
+        <div class="logo-container config-to-blur"  >
             <i class="far fa-bookmark  fa-2x" class="logo-icon"></i>        
             <span class="logo-name">v</span>
             <span class="logo-name" id="lib-name">Lib</span>
         </div>
         <nav class="navigation-menu">
-            <a href="#virtual-library" class="nav-link" id="about">About</a>
-            <a href="https://bookaid.org/support-us/donate-books/" target="_blank" class="nav-link" id="donate">Donate</a>
-            <a href="#" class="nav-link" id="login">Login</a>
+            <a href="#" class="nav-link" id="preferences" onclick="configFunc()">Preferences</a>
+            <a href="#virtual-library" class="nav-link config-to-blur" id="about">About</a>
+            <a href="https://bookaid.org/support-us/donate-books/" target="_blank" class="nav-link config-to-blur" id="donate">Donate</a>
+            <a href="#" class="nav-link config-to-blur" id="login">Login</a>
         </nav>
+        <div class="pop-up-config-storage">Choose an option to store your book reading data:<br>
+            <button class="store-config-selection">Local Storage</button>
+            <button class="store-config-selection">Cloud Storage</button>
+        </div>
     </header>
 
     <!-- Showcase section -->
-    <section class="showcase to-blur">
+    <section class="showcase to-blur config-to-blur">
         <div class="text-container">
             <p class="showcase-text" id="showcase-text-main">Welcome to our <i id="animate-bounce">humble</i> virtual library</p>
             <p class="showcase-text" id="showcase-text-sub">outside of a dog, a book is a man's best friend!</p>
@@ -55,9 +60,9 @@
 
     <!-- Library section -->
     <section id="virtual-library" class="library">
-        <div class="library-title to-blur">Welcome to your reading tracker section!</div>
-        <div class="library-subtitle to-blur">
-            <button id="add-book" class="to-blur">
+        <div class="library-title to-blur config-to-blur">Welcome to your reading tracker section!</div>
+        <div class="library-subtitle to-blur config-to-blur">
+            <button id="add-book" class="to-blur config-to-blur">
                 <i class="far fa-plus-square"></i>
                 <span>Add new book</span>
             </button>
@@ -79,15 +84,36 @@
                 </div>
             </div>
         </form>
-        <div id="library-elements-container" class="to-blur">
-            
+        <div class="to-blur config-to-blur" >
+            <div class="books" id="library-elements-container">
+                <div class="book-description">
+                    <div class="book-detail">BOOK'S TITLE<br>
+                        <span class="book-specs" class="book-title">Dom Quixote</span>
+                    </div>
+                    <div class="book-detail">BOOK'S AUTHOR<br>
+                        <span class="book-specs" class="book-title">Quixaba</span>
+                    </div>
+                    <div class="book-detail">NUMBER OF PAGES<br>
+                        <span class="book-specs" class="book-total-pages">255</span>
+                    </div>
+                    <div class="book-detail">CURRENT PAGE<br>
+                        <span class="book-specs" class="book-current-page">50</span>
+                    </div>
+                    <div class="book-detail">BOOK STATUS<br>
+                        <span class="book-specs" class="book-status">Not read</span>
+                    </div>
+                    <div >
+                        <button class="edit-book-button">Edit</button>
+                    </div>
+                </div>               
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="to-blur">
+    <footer class="to-blur config-to-blur">
         <i class="fab fa-github-alt"></i>
-        <span>Created by <a href="https://github.com/vinicap" target="_blank"><i>Spoix</i></a></span>
+        <span>Created by <a href="https://github.com/Spoix" target="_blank"><i>Spoix</i></a></span>
     </footer>
 </div>
 </body>

@@ -395,6 +395,31 @@ footer {
     font-weight: bold;
     border-radius: 5%;
     cursor: pointer;  
-      
+}
+
+.store-config-selection {
+    border-radius: 0.5rem;
+}
+
+#cancel-selection {
+    background-color: red;
+    font-weight: bold;
+    color: white;
+}
+
+.book-buttons {
+    background: linear-gradient(180deg, rgba(1,1,1,1) 29%, rgba(14,2,38,1) 74%, rgba(18,1,42,1) 100%);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.book-buttons:hover {
+    transform: scale(1.2);
+    background-color: black;
 }
 

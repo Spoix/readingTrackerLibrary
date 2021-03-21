@@ -8,7 +8,7 @@ if (userLocalStorage == "yes") {
     selectuserLocalStorage.setAttribute("style", "background-color: green", "color: white", "font-weight: bold")
 }
 
-if (localStorage.getItem("isLocal") == "yes") {
+if (localStorage.getItem("isLocal") == "yes" && localStorage.length > 2) {
     printAllBooks();
 }
 
@@ -121,8 +121,6 @@ function Book(title, author, tpages, cpages, isRead) {
     this.isRead = isRead ? "Read" : "Not Read";
 }
 
-let aBookName;
-
 function addBookToLibrary() {
     let bookTitle = document.querySelector("#title").value
     let bookAuthor = document.querySelector("#author").value
@@ -130,42 +128,53 @@ function addBookToLibrary() {
     let bookCPages = document.querySelector("#cpages").value
     let bookReadingState = document.querySelector("#is-read").checked ? true : false;
     let newBook = new Book(bookTitle, bookAuthor, bookTPages, bookCPages, bookReadingState);
-    myLibrary.push(newBook);
-    let bookContent = document.createElement("div");
-    bookContent.classList.add("book-description");
-    bookContent.innerHTML = `
-        <div class="book-detail">BOOK'S TITLE<br>
-            <span class="book-specs" class="book-title">${newBook.title}</span>
-        </div>
-        <div class="book-detail">BOOK'S AUTHOR<br>
-            <span class="book-specs" class="book-title">${newBook.author}</span>
-        </div>
-        <div class="book-detail">NUMBER OF PAGES<br>
-            <span class="book-specs" class="book-total-pages">${newBook.tpages}</span>
-        </div>
-        <div class="book-detail">CURRENT PAGE<br>
-            <span class="book-specs" class="book-current-page">${newBook.cpages}</span>
-        </div>
-        <div class="book-detail">BOOK STATUS<br>
-            <span class="book-specs" class="book-status">${newBook.isRead}</span>
-        </div>
-        <div>
-            <button class="edit-book-button">Edit</button>
-        </div>
-    `;
-    document.querySelector("#library-elements-container").appendChild(bookContent);
-    localStorageSetting();
+    let booksAlreadyStoraged = [];
+    for (i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).includes("object")) {
+            booksAlreadyStoraged.push(JSON.parse(localStorage.getItem(localStorage.key(i))).title)
+        }
+    }
+    if (booksAlreadyStoraged.includes(bookTitle)) {
+        alert("The book is already storaged.")
+    } else {
+        myLibrary.push(newBook);
+        let bookContent = document.createElement("div");
+        bookContent.classList.add("book-description");
+        bookContent.innerHTML = `
+            <div class="book-detail">BOOK'S TITLE<br>
+                <span class="book-specs" class="book-title">${newBook.title}</span>
+            </div>
+            <div class="book-detail">BOOK'S AUTHOR<br>
+                <span class="book-specs" class="book-title">${newBook.author}</span>
+            </div>
+            <div class="book-detail">NUMBER OF PAGES<br>
+                <span class="book-specs" class="book-total-pages">${newBook.tpages}</span>
+            </div>
+            <div class="book-detail">CURRENT PAGE<br>
+                <span class="book-specs" class="book-current-page">${newBook.cpages}</span>
+            </div>
+            <div class="book-detail">BOOK STATUS<br>
+                <span class="book-specs" class="book-status">${newBook.isRead}</span>
+            </div>
+            <button class="book-buttons" id="edit-book-button">Edit</button>
+            <button class="book-buttons" id="delete-book-button" onclick="removeBook()">Delete</button>
+        `;
+        document.querySelector("#library-elements-container").appendChild(bookContent);
+        localStorageSetting();
+        myLibrary = [];
+        document.querySelector("#add-book-form").setAttribute("style", "display: none");
+        toggleVisibility();
+    }
+    
 }
 
 function localStorageSetting() {
-        let initialCounter = 0;
-        myLibrary.forEach((book) => {
-            localStorage.setItem(`${localStorage.length+1}${book}`, JSON.stringify(myLibrary[initialCounter]));
-            initialCounter += 1;
-        });
+    let initialCounter = 0;
+    myLibrary.forEach((book) => {
+        localStorage.setItem(`${localStorage.length+1}${book}`, JSON.stringify(myLibrary[initialCounter]));
+        initialCounter += 1;
+    });
 }
-
-
 
 function printAllBooks() {
     for (i = 0; i < localStorage.length; i++) {
@@ -175,28 +184,74 @@ function printAllBooks() {
             let bookToPrint = JSON.parse(localStorage.getItem(localStorage.key(i)))
             bookContent.innerHTML = `
             <div class="book-detail">BOOK'S TITLE<br>
-                <span class="book-specs" class="book-title">${bookToPrint.title}</span>
+                <span class="book-specs" class="book-title" id = "bt">${bookToPrint.title}</span>
             </div>
             <div class="book-detail">BOOK'S AUTHOR<br>
-                <span class="book-specs" class="book-title">${bookToPrint.author}</span>
+                <span class="book-specs" class="book-title" id = "ba">${bookToPrint.author}</span>
             </div>
             <div class="book-detail">NUMBER OF PAGES<br>
-                <span class="book-specs" class="book-total-pages">${bookToPrint.tpages}</span>
+                <span class="book-specs" class="book-total-pages" id = "tp">${bookToPrint.tpages}</span>
             </div>
             <div class="book-detail">CURRENT PAGE<br>
-                <span class="book-specs" class="book-current-page">${bookToPrint.cpages}</span>
+                <span class="book-specs" class="book-current-page" id = "cp">${bookToPrint.cpages}</span>
             </div>
             <div class="book-detail">BOOK STATUS<br>
-                <span class="book-specs" class="book-status">${bookToPrint.isRead}</span>
+                <span class="book-specs" class="book-status" id = "ir">${bookToPrint.isRead}</span>
             </div>
-            <button class="book-buttons" id="edit-book-button">Edit</button>
+            <button class="book-buttons" id="edit-book-button" onclick="editBook()">Edit</button>
             <button class="book-buttons" id="delete-book-button" onclick="removeBook()">Delete</button>
         `;
         document.querySelector("#library-elements-container").appendChild(bookContent);
-    }
+        }
     }
 }
 
 function removeBook () {
+    for (i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).includes("object")) {
+            let titleOnStorage = JSON.parse(localStorage.getItem(localStorage.key(i))).title
+            let myBookTitle = document.querySelector("#delete-book-button").parentElement.firstElementChild.textContent.includes(titleOnStorage)
+            if (myBookTitle) {
+                localStorage.removeItem(localStorage.key(i))
+            }
+        }
+    }
     document.querySelector("#delete-book-button").parentElement.remove()
+}
+
+function editBook () {
+    let initialValues = {
+        initTitle: document.querySelector("#bt"),
+        initAuthor: document.querySelector("#ba"),
+        initTp: document.querySelector("#tp"),
+        initCp: document.querySelector("#cp"),
+        initIr: document.querySelector("#ir")
+    };
+    let currentTitle = initialValues.initTitle.textContent
+    Object.values(initialValues).forEach((el) => {
+        el.setAttribute("contenteditable", "true");
+        el.addEventListener("input", (e) => {
+            if (e.target.id == "bt") {
+                for (i = 0; i < localStorage.length; i++) {
+                    if (localStorage.key(i).includes("object")) {
+                        let storagedTitle = JSON.parse(localStorage.getItem(localStorage.key(i))).title
+                        if (currentTitle == storagedTitle) {
+                            let toChange = localStorage.key(i)
+                            console.log(JSON.parse(localStorage.getItem(toChange)))
+                            // localStorage.setItem(localStorage.key(i), JSON.stringify({title: "teste", author: "fad", tpages: "fd", cpages: "fda", isRead: "Not Read"}))
+                        }
+                    }
+                }
+            } else if (e.target.id == "ba") {
+                console.log("autor")
+            } else if (e.target.id == "tp") {
+                console.log("totalp")
+            } else if (e.target.id == "cp") {
+                console.log("currentp")
+            } else {
+                console.log("isread")
+            }
+
+        })
+    })
 }

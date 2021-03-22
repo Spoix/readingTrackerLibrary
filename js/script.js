@@ -131,10 +131,10 @@ function addBookToLibrary() {
     let booksAlreadyStoraged = [];
     for (i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i).includes("object")) {
-            booksAlreadyStoraged.push(JSON.parse(localStorage.getItem(localStorage.key(i))).title)
+            booksAlreadyStoraged.push(JSON.parse(localStorage.getItem(localStorage.key(i))).title.toLowerCase())
         }
     }
-    if (booksAlreadyStoraged.includes(bookTitle)) {
+    if (booksAlreadyStoraged.includes(bookTitle.toLowerCase())) {
         alert("The book is already storaged.")
     } else {
         myLibrary.push(newBook);
@@ -142,21 +142,21 @@ function addBookToLibrary() {
         bookContent.classList.add("book-description");
         bookContent.innerHTML = `
             <div class="book-detail">BOOK'S TITLE<br>
-                <span class="book-specs" class="book-title">${newBook.title}</span>
+                <span class="book-specs" class="book-title" id = "bt">${newBook.title.toUpperCase()}</span>
             </div>
             <div class="book-detail">BOOK'S AUTHOR<br>
-                <span class="book-specs" class="book-title">${newBook.author}</span>
+                <span class="book-specs" class="book-title" id = "ba">${newBook.author}</span>
             </div>
             <div class="book-detail">NUMBER OF PAGES<br>
-                <span class="book-specs" class="book-total-pages">${newBook.tpages}</span>
+                <span class="book-specs" class="book-total-pages" id = "tp">${newBook.tpages}</span>
             </div>
             <div class="book-detail">CURRENT PAGE<br>
-                <span class="book-specs" class="book-current-page">${newBook.cpages}</span>
+                <span class="book-specs" class="book-current-page" id = "cp">${newBook.cpages}</span>
             </div>
             <div class="book-detail">BOOK STATUS<br>
-                <span class="book-specs" class="book-status">${newBook.isRead}</span>
+                <span class="book-specs" class="book-status" id = "ir">${newBook.isRead}</span>
             </div>
-            <button class="book-buttons" id="edit-book-button">Edit</button>
+            <button class="book-buttons" id="edit-book-button" onclick="editBook()">Edit</button>
             <button class="book-buttons" id="delete-book-button" onclick="removeBook()">Delete</button>
         `;
         document.querySelector("#library-elements-container").appendChild(bookContent);
@@ -228,6 +228,10 @@ function editBook () {
         initIr: document.querySelector("#ir")
     };
     let currentTitle = initialValues.initTitle.textContent
+    let currentAuthor = initialValues.initAuthor.textContent
+    let currentTp = initialValues.initTp.textContent
+    let currentCp = initialValues.initCp.textContent
+    let currentIr = initialValues.initIr.textContent
     Object.values(initialValues).forEach((el) => {
         el.setAttribute("contenteditable", "true");
         el.addEventListener("input", (e) => {
@@ -236,20 +240,71 @@ function editBook () {
                     if (localStorage.key(i).includes("object")) {
                         let storagedTitle = JSON.parse(localStorage.getItem(localStorage.key(i))).title
                         if (currentTitle == storagedTitle) {
-                            let toChange = localStorage.key(i)
-                            console.log(JSON.parse(localStorage.getItem(toChange)))
-                            // localStorage.setItem(localStorage.key(i), JSON.stringify({title: "teste", author: "fad", tpages: "fd", cpages: "fda", isRead: "Not Read"}))
+                            dataTitle = localStorage.getItem(localStorage.key(i));
+                            newTitle = JSON.parse(dataTitle);
+                            newTitle.title = e.target.textContent
+                            localStorage.setItem(localStorage.key(i), JSON.stringify(newTitle))
+                            storagedTitle = JSON.parse(localStorage.getItem(localStorage.key(i))).title
+                            currentTitle = storagedTitle
                         }
                     }
                 }
             } else if (e.target.id == "ba") {
-                console.log("autor")
+                for (i = 0; i < localStorage.length; i++) {
+                    if (localStorage.key(i).includes("object")) {
+                        let storagedAuthor = JSON.parse(localStorage.getItem(localStorage.key(i))).author
+                        if (currentAuthor == storagedAuthor) {
+                            dataAuthor = localStorage.getItem(localStorage.key(i));
+                            newAuthor = JSON.parse(dataAuthor);
+                            newAuthor.author = e.target.textContent
+                            localStorage.setItem(localStorage.key(i), JSON.stringify(newAuthor))
+                            storagedAuthor = JSON.parse(localStorage.getItem(localStorage.key(i))).author
+                            currentAuthor = storagedAuthor
+                        }
+                    }
+                }
             } else if (e.target.id == "tp") {
-                console.log("totalp")
+                for (i = 0; i < localStorage.length; i++) {
+                    if (localStorage.key(i).includes("object")) {
+                        let storagedTp = JSON.parse(localStorage.getItem(localStorage.key(i))).tpages
+                        if (currentTp == storagedTp) {
+                            dataTp = localStorage.getItem(localStorage.key(i));
+                            newTp = JSON.parse(dataTp);
+                            newTp.tpages = e.target.textContent
+                            localStorage.setItem(localStorage.key(i), JSON.stringify(newTp))
+                            storagedTp = JSON.parse(localStorage.getItem(localStorage.key(i))).tpages
+                            currentTp = storagedTp
+                        }
+                    }
+                }
             } else if (e.target.id == "cp") {
-                console.log("currentp")
+                for (i = 0; i < localStorage.length; i++) {
+                    if (localStorage.key(i).includes("object")) {
+                        let storagedCp = JSON.parse(localStorage.getItem(localStorage.key(i))).cpages
+                        if (currentCp == storagedCp) {
+                            dataCp = localStorage.getItem(localStorage.key(i));
+                            newCp = JSON.parse(dataCp);
+                            newCp.cpages = e.target.textContent
+                            localStorage.setItem(localStorage.key(i), JSON.stringify(newCp))
+                            storagedCp = JSON.parse(localStorage.getItem(localStorage.key(i))).cpages
+                            currentCp = storagedCp
+                        }
+                    }
+                }
             } else {
-                console.log("isread")
+                for (i = 0; i < localStorage.length; i++) {
+                    if (localStorage.key(i).includes("object")) {
+                        let storagedIr = JSON.parse(localStorage.getItem(localStorage.key(i))).isRead
+                        if (currentIr == storagedIr) {
+                            dataIr = localStorage.getItem(localStorage.key(i));
+                            newIr = JSON.parse(dataIr);
+                            newIr.isRead = e.target.textContent
+                            localStorage.setItem(localStorage.key(i), JSON.stringify(newIr))
+                            storagedIr = JSON.parse(localStorage.getItem(localStorage.key(i))).isRead
+                            currentIr = storagedIr
+                        }
+                    }
+                }
             }
 
         })

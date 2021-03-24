@@ -177,7 +177,7 @@ header {
     margin-right: 3rem;
     margin-left: 3rem;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(1, 1fr);
     padding: 1rem;
     border-bottom: 1rem solid black; 
@@ -188,6 +188,7 @@ header {
     border: 1px solid gray;
     border-radius: 10%;
     padding: 0.5rem;
+    margin: 0.5rem;
 }
 
 .book-detail {
@@ -372,6 +373,25 @@ footer {
         margin: 3rem;
     }
 }
+
+@media only screen and (max-width: 1189px) {
+    #library-elements-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media only screen and (max-width: 891px) {
+    #library-elements-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #library-elements-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
 
 
 /* Config data storage settings */

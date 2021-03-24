@@ -142,7 +142,7 @@ function addBookToLibrary() {
         bookContent.classList.add("book-description");
         bookContent.innerHTML = `
             <div class="book-detail">BOOK'S TITLE<br>
-                <span class="book-specs" class="book-title" id = "bt">${newBook.title.toUpperCase()}</span>
+                <span class="book-specs" class="book-title" id = "bt">${newBook.title.charAt(0).toUpperCase() + newBook.title.slice(1)}</span>
             </div>
             <div class="book-detail">BOOK'S AUTHOR<br>
                 <span class="book-specs" class="book-title" id = "ba">${newBook.author}</span>
@@ -156,8 +156,8 @@ function addBookToLibrary() {
             <div class="book-detail">BOOK STATUS<br>
                 <span class="book-specs" class="book-status" id = "ir">${newBook.isRead}</span>
             </div>
-            <button class="book-buttons" id="edit-book-button" onclick="editBook()">Edit</button>
-            <button class="book-buttons" id="delete-book-button" onclick="removeBook()">Delete</button>
+            <button class="book-buttons" id="edit-book-button" onclick="editBook(this)">Edit</button>
+            <button class="book-buttons" id="${Math.random()}delete-book-button" onclick="removeBook(this)">Delete</button>
         `;
         document.querySelector("#library-elements-container").appendChild(bookContent);
         localStorageSetting();
@@ -184,7 +184,7 @@ function printAllBooks() {
             let bookToPrint = JSON.parse(localStorage.getItem(localStorage.key(i)))
             bookContent.innerHTML = `
             <div class="book-detail">BOOK'S TITLE<br>
-                <span class="book-specs" class="book-title" id = "bt">${bookToPrint.title}</span>
+                <span class="book-specs" class="book-title" id = "bt">${bookToPrint.title.charAt(0).toUpperCase() + bookToPrint.title.slice(1)}</span>
             </div>
             <div class="book-detail">BOOK'S AUTHOR<br>
                 <span class="book-specs" class="book-title" id = "ba">${bookToPrint.author}</span>
@@ -198,34 +198,34 @@ function printAllBooks() {
             <div class="book-detail">BOOK STATUS<br>
                 <span class="book-specs" class="book-status" id = "ir">${bookToPrint.isRead}</span>
             </div>
-            <button class="book-buttons" id="edit-book-button" onclick="editBook()">Edit</button>
-            <button class="book-buttons" id="delete-book-button" onclick="removeBook()">Delete</button>
+            <button class="book-buttons" id="edit-book-button" onclick="editBook(this)">Edit</button>
+            <button class="book-buttons" id="${Math.random()}delete-book-button" onclick="removeBook(this)">Delete</button>
         `;
         document.querySelector("#library-elements-container").appendChild(bookContent);
         }
     }
 }
 
-function removeBook () {
+function removeBook (val) {
     for (i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i).includes("object")) {
             let titleOnStorage = JSON.parse(localStorage.getItem(localStorage.key(i))).title
-            let myBookTitle = document.querySelector("#delete-book-button").parentElement.firstElementChild.textContent.includes(titleOnStorage)
+            let myBookTitle = val.parentElement.firstElementChild.textContent.includes(titleOnStorage)
             if (myBookTitle) {
                 localStorage.removeItem(localStorage.key(i))
+                val.parentElement.remove()
             }
         }
     }
-    document.querySelector("#delete-book-button").parentElement.remove()
 }
 
-function editBook () {
+function editBook (val) {
     let initialValues = {
-        initTitle: document.querySelector("#bt"),
-        initAuthor: document.querySelector("#ba"),
-        initTp: document.querySelector("#tp"),
-        initCp: document.querySelector("#cp"),
-        initIr: document.querySelector("#ir")
+        initTitle: val.parentElement.childNodes[1].childNodes[3],
+        initAuthor: val.parentElement.childNodes[3].childNodes[3],
+        initTp: val.parentElement.childNodes[5].childNodes[3],
+        initCp: val.parentElement.childNodes[7].childNodes[3],
+        initIr: val.parentElement.childNodes[9].childNodes[3],
     };
     let currentTitle = initialValues.initTitle.textContent
     let currentAuthor = initialValues.initAuthor.textContent

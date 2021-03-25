@@ -1,0 +1,16 @@
+[debug] [2021-03-24T23:59:18.336Z] ----------------------------------------------------------------------
+[debug] [2021-03-24T23:59:18.337Z] Command:       /usr/local/bin/firebase /home/vinicius/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase login
+[debug] [2021-03-24T23:59:18.338Z] CLI Version:   9.7.0
+[debug] [2021-03-24T23:59:18.338Z] Platform:      linux
+[debug] [2021-03-24T23:59:18.338Z] Node Version:  v12.18.1
+[debug] [2021-03-24T23:59:18.338Z] Time:          Wed Mar 24 2021 20:59:18 GMT-0300 (Brasilia Standard Time)
+[debug] [2021-03-24T23:59:18.338Z] ----------------------------------------------------------------------
+[debug] 
+[info] i  Firebase optionally collects CLI usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 
+[info] i  To change your data collection preference at any time, run `firebase logout` and log in again. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=406359568&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
